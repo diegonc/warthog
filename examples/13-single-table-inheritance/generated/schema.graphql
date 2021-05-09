@@ -1,0 +1,395 @@
+interface BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+}
+
+type BaseModel implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+}
+
+type BaseModelUUID implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+}
+
+input BaseWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+interface DeleteResponse {
+  id: ID!
+}
+
+type Group implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+  commonName: String!
+  groups: [GroupParty!]
+  groupName: String!
+  parties: [GroupParty!]
+}
+
+input GroupCreateInput {
+  commonName: String!
+  groupName: String!
+}
+
+enum GroupOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  commonName_ASC
+  commonName_DESC
+  groupName_ASC
+  groupName_DESC
+}
+
+type GroupParty implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+  group: Group
+  groupId: String!
+  party: Party
+  partyId: String!
+  dummyField: String
+}
+
+input GroupPartyCreateInput {
+  groupId: ID!
+  partyId: ID!
+  dummyField: String
+}
+
+input GroupPartyUpdateInput {
+  groupId: ID
+  partyId: ID
+  dummyField: String
+}
+
+input GroupPartyWhereInput {
+  id_eq: ID
+  id_in: [ID!]
+  createdAt_eq: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdById_eq: ID
+  createdById_in: [ID!]
+  updatedAt_eq: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedById_eq: ID
+  updatedById_in: [ID!]
+  deletedAt_all: Boolean
+  deletedAt_eq: DateTime
+  deletedAt_lt: DateTime
+  deletedAt_lte: DateTime
+  deletedAt_gt: DateTime
+  deletedAt_gte: DateTime
+  deletedById_eq: ID
+  deletedById_in: [ID!]
+  groupId_eq: ID
+  groupId_in: [ID!]
+  partyId_eq: ID
+  partyId_in: [ID!]
+  dummyField_eq: String
+  dummyField_contains: String
+  dummyField_startsWith: String
+  dummyField_endsWith: String
+  dummyField_in: [String!]
+}
+
+input GroupPartyWhereUniqueInput {
+  id: ID!
+}
+
+input GroupUpdateInput {
+  commonName: String
+  groupName: String
+}
+
+input GroupWhereInput {
+  id_eq: ID
+  id_in: [ID!]
+  createdAt_eq: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdById_eq: ID
+  createdById_in: [ID!]
+  updatedAt_eq: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedById_eq: ID
+  updatedById_in: [ID!]
+  deletedAt_all: Boolean
+  deletedAt_eq: DateTime
+  deletedAt_lt: DateTime
+  deletedAt_lte: DateTime
+  deletedAt_gt: DateTime
+  deletedAt_gte: DateTime
+  deletedById_eq: ID
+  deletedById_in: [ID!]
+  commonName_eq: String
+  commonName_contains: String
+  commonName_startsWith: String
+  commonName_endsWith: String
+  commonName_in: [String!]
+  groupName_eq: String
+  groupName_contains: String
+  groupName_startsWith: String
+  groupName_endsWith: String
+  groupName_in: [String!]
+}
+
+input GroupWhereUniqueInput {
+  id: ID
+  groupName: String
+}
+
+type Mutation {
+  createGroup(data: GroupCreateInput!): Group!
+  createManyGroups(data: [GroupCreateInput!]!): [Group!]!
+  updateGroup(data: GroupUpdateInput!, where: GroupWhereUniqueInput!): Group!
+  deleteGroup(where: GroupWhereUniqueInput!): StandardDeleteResponse!
+  createPerson(data: PersonCreateInput!): Person!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Party implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+  commonName: String!
+  groups: [GroupParty!]
+}
+
+input PartyCreateInput {
+  commonName: String!
+}
+
+enum PartyOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  commonName_ASC
+  commonName_DESC
+}
+
+input PartyUpdateInput {
+  commonName: String
+}
+
+input PartyWhereInput {
+  id_eq: ID
+  id_in: [ID!]
+  createdAt_eq: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdById_eq: ID
+  createdById_in: [ID!]
+  updatedAt_eq: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedById_eq: ID
+  updatedById_in: [ID!]
+  deletedAt_all: Boolean
+  deletedAt_eq: DateTime
+  deletedAt_lt: DateTime
+  deletedAt_lte: DateTime
+  deletedAt_gt: DateTime
+  deletedAt_gte: DateTime
+  deletedById_eq: ID
+  deletedById_in: [ID!]
+  commonName_eq: String
+  commonName_contains: String
+  commonName_startsWith: String
+  commonName_endsWith: String
+  commonName_in: [String!]
+}
+
+input PartyWhereUniqueInput {
+  id: ID!
+}
+
+type Person implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+  commonName: String!
+  groups: [GroupParty!]
+  firstName: String!
+  lastName: String!
+  email: String
+  password: String
+}
+
+input PersonCreateInput {
+  commonName: String!
+  firstName: String!
+  lastName: String!
+  email: String
+  password: String
+}
+
+input PersonUpdateInput {
+  commonName: String
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+}
+
+input PersonWhereInput {
+  id_eq: ID
+  id_in: [ID!]
+  createdAt_eq: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdById_eq: ID
+  createdById_in: [ID!]
+  updatedAt_eq: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedById_eq: ID
+  updatedById_in: [ID!]
+  deletedAt_all: Boolean
+  deletedAt_eq: DateTime
+  deletedAt_lt: DateTime
+  deletedAt_lte: DateTime
+  deletedAt_gt: DateTime
+  deletedAt_gte: DateTime
+  deletedById_eq: ID
+  deletedById_in: [ID!]
+  commonName_eq: String
+  commonName_contains: String
+  commonName_startsWith: String
+  commonName_endsWith: String
+  commonName_in: [String!]
+  firstName_eq: String
+  firstName_contains: String
+  firstName_startsWith: String
+  firstName_endsWith: String
+  firstName_in: [String!]
+  lastName_eq: String
+  lastName_contains: String
+  lastName_startsWith: String
+  lastName_endsWith: String
+  lastName_in: [String!]
+  email_eq: String
+  email_contains: String
+  email_startsWith: String
+  email_endsWith: String
+  email_in: [String!]
+  password_eq: String
+  password_contains: String
+  password_startsWith: String
+  password_endsWith: String
+  password_in: [String!]
+}
+
+input PersonWhereUniqueInput {
+  id: ID!
+}
+
+type Query {
+  groups(offset: Int, limit: Int = 50, where: GroupWhereInput, orderBy: GroupOrderByInput): [Group!]!
+  group(where: GroupWhereUniqueInput!): Group!
+  parties(offset: Int, limit: Int = 50, where: PartyWhereInput, orderBy: PartyOrderByInput): [Party!]!
+}
+
+type StandardDeleteResponse {
+  id: ID!
+}
